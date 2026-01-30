@@ -1,0 +1,505 @@
+# ============================================================================
+# Production-Ready .gitignore for Microservices Blog Platform
+# ============================================================================
+# This file prevents credentials, build artifacts, and unnecessary files
+# from being committed to the repository.
+# ============================================================================
+
+# ============================================================================
+# ENVIRONMENT VARIABLES & CREDENTIALS (CRITICAL - NEVER COMMIT)
+# ============================================================================
+.env
+.env.local
+.env.*.local
+.env.development
+.env.staging
+.env.production
+.env.test
+.env.example
+env.local
+.env.*.example
+*.pem
+*.key
+*.crt
+
+# SSH Keys
+ssh/
+id_rsa
+id_rsa.pub
+*.ppk
+
+# Credentials and secrets
+secrets/
+credentials/
+.aws/
+.ssh/
+config/secrets.js
+config/credentials.js
+*.credentials
+
+# ============================================================================
+# NODE.JS & NPM
+# ============================================================================
+node_modules/
+npm-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.npm
+.eslintcache
+.node_repl_history
+*.tsbuildinfo
+
+# ============================================================================
+# BUILD OUTPUT & DIST
+# ============================================================================
+dist/
+build/
+out/
+*.bundle.js
+*.bundle.map
+.next/
+.nuxt/
+coverage/
+.nyc_output/
+.coverage
+htmlcov/
+
+# ============================================================================
+# LOGS
+# ============================================================================
+logs/
+log/
+*.log
+*.log.*
+logs.txt
+debug.log
+error.log
+
+# ============================================================================
+# TEMPORARY FILES
+# ============================================================================
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.vscode/.history
+.vscode/settings.json.bak
+
+# ============================================================================
+# DOCKER
+# ============================================================================
+# Keep Dockerfiles but ignore build artifacts
+docker-compose.override.yml
+docker-compose.dev.yml
+.dockerignore.bak
+
+# ============================================================================
+# DATABASE
+# ============================================================================
+*.sql
+*.sql.bak
+database/
+db/
+*.db
+*.sqlite
+*.sqlite3
+*.pgsql
+data/
+pgdata/
+mongodb_data/
+mysql_data/
+postgres_data/
+redis_data/
+rabbitmq_data/
+
+# ============================================================================
+# IDE & EDITOR
+# ============================================================================
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+.AppleDouble
+.LSOverride
+*.iml
+.gradle/
+
+# ============================================================================
+# TESTING
+# ============================================================================
+coverage/
+.coverage
+.nyc_output/
+test-results/
+junit.xml
+test-report.html
+cypress/videos/
+cypress/screenshots/
+.mocha-results.json
+
+# ============================================================================
+# OS SPECIFIC
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.AppleDouble
+.LSOverride
+
+# ============================================================================
+# RUNTIME & PROCESS
+# ============================================================================
+.pm2/
+.nodemon.json
+.restart.pid
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================================================
+# BACKUP FILES
+# ============================================================================
+backups/
+*.backup
+*.bak
+*.backup.*
+*.old
+*.orig
+*~
+*.swp
+
+# ============================================================================
+# DEVELOPMENT TOOLS
+# ============================================================================
+.vscode-test/
+.vscode-insiders/
+.vscode-oss/
+.parcel-cache/
+dist-ssr/
+*.local
+
+# ============================================================================
+# CACHE
+# ============================================================================
+.cache/
+.eslintcache
+.stylelintcache
+.prettierignore
+.prettiercache
+
+# ============================================================================
+# BUILD SYSTEM
+# ============================================================================
+.webpack/
+webpack-bundle-analyzer report
+report.html
+bundle-report.html
+dist-stats.json
+
+# ============================================================================
+# CERTIFICATE FILES
+# ============================================================================
+*.pem
+*.p7b
+*.p7c
+*.p7r
+*.p7s
+*.pfx
+*.p12
+*.jks
+certs/
+certificates/
+
+# ============================================================================
+# PACKAGE MANAGER LOCK FILES (for consistency in CI/CD)
+# ============================================================================
+# Note: Uncomment if you want to commit lock files. Generally recommended
+# for production, but leaving commented for flexibility
+# package-lock.json is already excluded above
+# yarn.lock is already excluded above
+
+# ============================================================================
+# SENSITIVE PROJECT FILES
+# ============================================================================
+.env.production.local
+.env.test.local
+.env.development.local
+.env.*.local
+secrets.json
+credentials.json
+config/database.config.js
+config/jwt.config.js
+config/aws.config.js
+config/stripe.config.js
+config/paypal.config.js
+
+# ============================================================================
+# CLOUD CREDENTIALS
+# ============================================================================
+.aws/credentials
+.aws/config
+.gcloud/
+google-cloud-credentials.json
+firebase-key.json
+firebase-credentials.json
+aws-credentials.json
+azure-credentials.json
+digitalocean-token
+
+# ============================================================================
+# MISC SENSITIVE DATA
+# ============================================================================
+.env.vault
+.env.vault.local
+.env.vault.backup
+vault/
+vault-keys/
+encryption-keys/
+private-keys/
+api-keys.json
+access-keys.json
+
+# ============================================================================
+# TERRAFORM & INFRASTRUCTURE
+# ============================================================================
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/crash.log
+terraform/override.tf
+terraform/override.tf.json
+terraform/*_override.tf
+terraform/*_override.tf.json
+.terraformrc
+terraform.tfvars
+terraform.tfvars.json
+.terraform.lock.hcl
+
+# ============================================================================
+# KUBERNETES
+# ============================================================================
+kubeconfig
+kubeconfig.yaml
+.kube/
+helm-values.local.yaml
+
+# ============================================================================
+# DEPLOYMENT ARTIFACTS
+# ============================================================================
+deployment-logs/
+deployment-report/
+release-notes/
+changelog/
+build-artifacts/
+
+# ============================================================================
+# MONITORING & OBSERVABILITY
+# ============================================================================
+monitoring/logs/
+prometheus_data/
+grafana_data/
+elasticsearch_data/
+kibana_data/
+
+# ============================================================================
+# CI/CD ARTIFACTS (excluded from git but created during builds)
+# ============================================================================
+.github/workflows/run-logs/
+.gitlab-ci/artifacts/
+.circleci/artifacts/
+jenkins-workspace/
+build-logs/
+
+# ============================================================================
+# HEALTH CHECKS & REPORTS
+# ============================================================================
+health-check-reports/
+uptime-monitor/
+performance-reports/
+audit-reports/
+
+# ============================================================================
+# DOCUMENTATION BUILD ARTIFACTS
+# ============================================================================
+docs/_build/
+docs/.doctrees/
+site/
+
+# ============================================================================
+# VENDOR DIRECTORIES (if not using package managers)
+# ============================================================================
+vendor/
+third_party/
+
+# ============================================================================
+# MACOS SPECIFIC
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# ============================================================================
+# WINDOWS SPECIFIC
+# ============================================================================
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+**/desktop.ini
+
+# ============================================================================
+# EDITOR LOCK FILES
+# ============================================================================
+.#*
+*#
+*.geany
+*.kdev4
+nbproject/
+.project
+.pydevproject
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# ============================================================================
+# TEMPORARY COMPILATION/BUILD
+# ============================================================================
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.a
+*.dylib
+*.out
+
+# ============================================================================
+# DEPENDENCY DIRECTORIES (NPM)
+# ============================================================================
+# node_modules already listed above, but being specific
+.npm
+.eslintcache
+.tscache
+
+# ============================================================================
+# BROWSER & RUNTIME CACHES
+# ============================================================================
+.cache/
+.browserify-cache/
+jspm_packages/
+
+# ============================================================================
+# REDIS/CACHE
+# ============================================================================
+*.rdb
+dump.rdb
+redis_dump.rdb
+
+# ============================================================================
+# PM2 & PROCESS MANAGERS
+# ============================================================================
+.pm2/
+pm2-logs/
+pm2-cache/
+
+# ============================================================================
+# OPTIONAL FILE EXCLUSIONS
+# ============================================================================
+# Uncomment if you want to exclude these specific files
+
+# MacOS files
+# .DS_Store
+# Thumbs.db
+
+# IDEs
+# .vscode/
+# .idea/
+# *.sublime-*
+
+# Logs
+# logs/
+# *.log
+
+# ============================================================================
+# EXPLICIT INCLUSIONS (use ! to include files that match above patterns)
+# ============================================================================
+# Include example/template files (these should not contain secrets)
+!.env.example
+!.env.sample
+!.env.template
+!.env.production.example
+!.env.staging.example
+
+# Include important configuration templates
+!config/.env.example
+!config/database.example.js
+!config/redis.example.js
+
+# Include documentation
+!docs/
+!docs/**/*.md
+
+# Include GitHub Actions workflows (they are not secrets when properly written)
+!.github/workflows/*.yml
+!.github/workflows/*.yaml
+!.github/*.md
+
+# Include Dockerfiles and docker-compose examples
+!Dockerfile
+!docker-compose.yml
+!docker-compose.*.example.yml
+
+# Include CI/CD configuration
+!.github/
+!.gitlab-ci.yml
+!.circleci/
+
+# Include shell scripts and utility files
+!scripts/
+!scripts/**
+
+# Include package.json files (safe to commit)
+!package.json
+!package*.json
+!*/package.json
+
+# Include README and important documentation
+!README.md
+!CONTRIBUTING.md
+!LICENSE
+!CHANGELOG.md
+
+# ============================================================================
+# END OF .gitignore
+# ============================================================================
