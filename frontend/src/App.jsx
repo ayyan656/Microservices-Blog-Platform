@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Header from './components/common/Header';
 import HomePage from './pages/HomePage';
@@ -12,13 +12,30 @@ import DraftsPage from './pages/DraftsPage';
 import ProtectedRoute from './routes/ProtectedRoute';
 import './App.css';
 
+/**
+ * Layout component that conditionally renders Header
+ * Hides header on editor pages (create-post, edit-post)
+ */
+function Layout({ children }) {
+  const location = useLocation();
+
+  // Hide header on editor pages
+  const isEditorPage = location.pathname.startsWith('/create-post') ||
+    location.pathname.startsWith('/edit-post');
+
+  return (
+    <div className={isEditorPage ? "" : "min-h-screen bg-gray-50"}>
+      {!isEditorPage && <Header />}
+      {children}
+    </div>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <div className="min-h-screen bg-gray-50">
-          <Header />
-
+        <Layout>
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<HomePage />} />
@@ -60,7 +77,7 @@ function App() {
               }
             />
           </Routes>
-        </div>
+        </Layout>
       </AuthProvider>
     </BrowserRouter>
   );

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPostById, updatePost } from '../api/posts.api';
-import { handleApiError } from '../utils/helpers';
-import PostForm from '../components/posts/PostForm';
+import { EditorLayout } from '../components/editor';
 import Loader from '../components/common/Loader';
 
 export default function EditPostPage() {
@@ -19,7 +18,7 @@ export default function EditPostPage() {
                 const data = await getPostById(id);
                 setPost(data.post);
             } catch (err) {
-                setError(handleApiError(err));
+                setError(err.message || 'Failed to load post');
             } finally {
                 setLoading(false);
             }
@@ -28,15 +27,30 @@ export default function EditPostPage() {
         fetchPost();
     }, [id]);
 
-    const handleSubmit = async (data) => {
+    const handleSave = async (formData) => {
         setSubmitting(true);
         setError(null);
 
         try {
-            await updatePost(id, data);
+            await updatePost(id, formData);
+        } catch (err) {
+            setError(err.message || 'Failed to save post');
+            throw err;
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    const handlePublish = async (formData) => {
+        setSubmitting(true);
+        setError(null);
+
+        try {
+            await updatePost(id, formData);
             navigate(`/posts/${id}`);
         } catch (err) {
-            setError(handleApiError(err));
+            setError(err.message || 'Failed to publish post');
+            throw err;
         } finally {
             setSubmitting(false);
         }
@@ -57,24 +71,29 @@ export default function EditPostPage() {
     }
 
     return (
-        <div className="container-main py-12">
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-4xl font-bold mb-8">Edit Post</h1>
-
-                {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-                        {error}
-                    </div>
-                )}
-
-                <div className="card">
-                    <PostForm
-                        initialData={post}
-                        onSubmit={handleSubmit}
-                        loading={submitting}
-                    />
+        <>
+            {error && (
+                <div
+                    className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded shadow-lg"
+                    style={{ transform: 'translateX(-50%)' }}
+                >
+                    {error}
                 </div>
-            </div>
-        </div>
+            )}
+            <EditorLayout
+                initialData={{
+                    title: post?.title || '',
+                    content: post?.content || '',
+                    excerpt: post?.excerpt || '',
+                    status: post?.status || 'draft',
+                    tags: post?.tags || [],
+                    imageUrl: post?.imageUrl || null,
+                }}
+                onSave={handleSave}
+                onPublish={handlePublish}
+                loading={submitting}
+                mode="edit"
+            />
+        </>
     );
 }

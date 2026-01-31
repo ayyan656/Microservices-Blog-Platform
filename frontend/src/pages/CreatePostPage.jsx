@@ -1,43 +1,58 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPost } from '../api/posts.api';
-import { handleApiError } from '../utils/helpers';
-import PostForm from '../components/posts/PostForm';
+import { EditorLayout } from '../components/editor';
 
 export default function CreatePostPage() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleSubmit = async (data) => {
+    const handleSave = async (formData) => {
         setLoading(true);
         setError(null);
 
         try {
-            await createPost(data);
+            await createPost(formData);
+        } catch (err) {
+            setError(err.message || 'Failed to save post');
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handlePublish = async (formData) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            await createPost(formData);
             navigate('/');
         } catch (err) {
-            setError(handleApiError(err));
+            setError(err.message || 'Failed to publish post');
+            throw err;
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="container-main py-12">
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-4xl font-bold mb-8">Create New Post</h1>
-
-                {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-                        {error}
-                    </div>
-                )}
-
-                <div className="card">
-                    <PostForm onSubmit={handleSubmit} loading={loading} />
+        <>
+            {error && (
+                <div
+                    className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded shadow-lg"
+                    style={{ transform: 'translateX(-50%)' }}
+                >
+                    {error}
                 </div>
-            </div>
-        </div>
+            )}
+            <EditorLayout
+                onSave={handleSave}
+                onPublish={handlePublish}
+                loading={loading}
+                mode="create"
+            />
+        </>
     );
 }
