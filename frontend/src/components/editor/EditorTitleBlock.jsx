@@ -22,6 +22,7 @@ export default function EditorTitleBlock({ value, onChange }) {
         onChange(textarea.value);
     };
 
+
     // Handle Enter key to move to content (prevent new line)
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -35,15 +36,21 @@ export default function EditorTitleBlock({ value, onChange }) {
     };
 
     return (
-        <textarea
-            ref={inputRef}
-            className="editor-title-input"
-            placeholder="Enter title..."
-            value={value}
-            onChange={handleInput}
-            onKeyDown={handleKeyDown}
-            rows={1}
-            aria-label="Post title"
-        />
+        <>
+            <label htmlFor="post-title" className="sr-only">
+                Post title
+            </label>
+            <textarea
+                ref={inputRef}
+                id="post-title"
+                name="title"
+                className="editor-title-input"
+                placeholder="Enter title..."
+                value={value}
+                onChange={handleInput}
+                onKeyDown={handleKeyDown}
+                rows={1}
+            />
+        </>
     );
 }

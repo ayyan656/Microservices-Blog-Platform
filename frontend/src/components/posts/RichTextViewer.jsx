@@ -7,10 +7,11 @@ export default function RichTextViewer({ content }) {
     });
 
     return (
-        <div className="article-content">
+        <div className="article-content" style={{ textAlign: 'left' }}>
             <div
                 dangerouslySetInnerHTML={{ __html: sanitizedContent }}
                 className="prose prose-lg prose-slate max-w-none"
+                style={{ textAlign: 'left' }}
             />
             <style>{`
                 .article-content h1, 
